@@ -312,7 +312,7 @@ func (j *Jenkins) GetJob(id string, parentIDs ...string) (*Job, error) {
 }
 
 func (j *Jenkins) GetSubJob(parentId string, childId string) (*Job, error) {
-	job := Job{Jenkins: j, Raw: new(JobResponse), Base: "/job/" + parentId + "/job/" + childId}
+	job := Job{Jenkins: j, Raw: new(JobResponse), Depth: 1, Base: "/job/" + parentId + "/job/" + childId}
 	status, err := job.Poll()
 	if err != nil {
 		return nil, fmt.Errorf("trouble polling job: %v", err)
